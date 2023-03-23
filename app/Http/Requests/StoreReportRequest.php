@@ -11,7 +11,7 @@ class StoreReportRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class StoreReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'user_id' => 'required',
+            "city" => 'required',
+            "description" => 'required',
+            'image' => 'required', 'image',
+            "report" => 'required', 'file',
+            'tags' => 'required',
+            'game' => 'required',
         ];
     }
 }

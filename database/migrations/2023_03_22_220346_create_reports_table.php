@@ -15,12 +15,15 @@ return new class extends Migration
             $table->id();
 
             //APARECE
-            $table->string("title");
+            $table->string('title');
             $table->foreignId('user_id')->constrained();
-            $table->string("city");
-            $table->string("description");
+            $table->string('city');
+            $table->string('description');
+            $table->string('slug');
             $table->string('image');
-            $table->longText("report"); //MUDAR POR CAUSA DO UPLOAD PDF (VAI SER STRING (LINK))
+
+            $table->longText('report'); //MUDAR POR CAUSA DO UPLOAD PDF (VAI SER STRING (LINK))
+
             $table->string('tags');
 
             //NAO APARECE

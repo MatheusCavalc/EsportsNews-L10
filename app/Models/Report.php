@@ -14,6 +14,7 @@ class Report extends Model
         'user_id',
         "city",
         "description",
+        'slug',
         'image',
         "report",
         'tags',

@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,14 +19,21 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+//FOR USERS
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/news/{id}/{slug}', [HomeController::class, 'showNews'])->name('show.report');
+
+//FOR EDITORS AND ADMINS
+Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');;
+Route::resource('reports', ReportController::class);
+
+
+
+
+
+
+
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

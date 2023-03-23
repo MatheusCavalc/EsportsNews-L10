@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreReportRequest;
 use App\Http\Requests\UpdateReportRequest;
 use App\Models\Report;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class ReportController extends Controller
 {
@@ -13,7 +16,9 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Admin/Reports/Index', [
+            'reports' => Report::all()
+        ]);
     }
 
     /**
@@ -21,7 +26,9 @@ class ReportController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Reports/Create', [
+            'user_id' => auth()->user()->id
+        ]);
     }
 
     /**
@@ -29,7 +36,25 @@ class ReportController extends Controller
      */
     public function store(StoreReportRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $slug = Str::slug($request->get('title'), '-');
+        $data['slug'] = $slug;
+
+        $image_slug = Str::slug($request->get('description'), '-');
+        $image = $request->file('image');
+        $image_name = time() . $image_slug . '.' . $image->getClientOriginalExtension();
+        $request->image->move(public_path('storage/image'), $image_name);
+        $data['image'] = $image_name;
+
+        $report = $request->file('report');
+        $report_name = time() . $slug . '.' . $report->getClientOriginalExtension();
+        $request->report->move(public_path('storage/report'), $report_name);
+        $data['report'] = $report_name;
+
+        Report::create($data);
+
+        return to_route('reports.index');
     }
 
     /**
@@ -45,7 +70,9 @@ class ReportController extends Controller
      */
     public function edit(Report $report)
     {
-        //
+        return Inertia::render('Admin/Reports/Edit', [
+            'report' => $report
+        ]);
     }
 
     /**
