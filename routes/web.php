@@ -20,24 +20,17 @@ use Inertia\Inertia;
 */
 
 //FOR USERS
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/news/{id}/{slug}', [HomeController::class, 'showNews'])->name('show.report');
 
 //FOR EDITORS AND ADMINS
-Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('reports', ReportController::class);
 Route::post('/upload-image', [ReportController::class, 'uploadImage']);
 
 
 
-
-
-
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

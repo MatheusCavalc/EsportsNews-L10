@@ -40,6 +40,7 @@ const editor = new EditorJS({
     holder: "editorjs",
     autofocus: true,
     initialBlock: "paragraph",
+    minHeight : 30,
     tools: {
         header: {
             class: Header,

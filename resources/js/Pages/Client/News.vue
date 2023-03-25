@@ -13,6 +13,7 @@ const props = defineProps(['report'])
 const editor = new EditorJS({
     holder: "editorjs",
     readOnly: true,
+    minHeight : 30,
     tools: {
         header: Header,
         list: List,

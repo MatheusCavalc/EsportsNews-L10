@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         return Inertia::render('Client/Index', [
-            'reports' => Report::all()
+            'reports' => Report::orderBy('id', 'desc')->get()
         ]);
     }
 

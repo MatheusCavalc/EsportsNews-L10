@@ -8,10 +8,10 @@ import { Link } from '@inertiajs/vue3';
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-gray-200 dark:bg-gray-900">
                 <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
-                    <a href="https://flowbite.com" class="flex items-center">
+                    <Link :href="route('index')" class="flex items-center">
                         <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
                         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-                    </a>
+                    </Link>
                     <div class="flex items-center">
                     </div>
                 </div>
@@ -22,8 +22,8 @@ import { Link } from '@inertiajs/vue3';
                         <div class="flex items-center">
                             <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
                                 <li>
-                                    <a href="#" class="text-gray-900 dark:text-white hover:underline"
-                                        aria-current="page">News</a>
+                                    <Link :href="route('index')" class="text-gray-900 dark:text-white hover:underline"
+                                        aria-current="page">News</Link>
                                 </li>
                                 <li>
                                     <a href="#" class="text-gray-900 dark:text-white hover:underline">Games</a>

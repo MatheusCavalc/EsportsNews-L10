@@ -75,7 +75,17 @@ class ReportController extends Controller
      */
     public function update(UpdateReportRequest $request, Report $report)
     {
-        //
+        $report->update([
+            'title' => $request->title,
+            'user_id' => $request->user_id,
+            "description" => $request->description,
+            'image' => $request->image,
+            "report" => $request->report,
+            'tags' => $request->tags,
+            'game' => $request->game,
+        ]);
+
+        return to_route('reports.index');
     }
 
     /**
@@ -83,7 +93,9 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
-        //
+        $report->delete();
+
+        return to_route('reports.index');
     }
 
     public function uploadImage(Request $request)

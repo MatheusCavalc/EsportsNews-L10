@@ -37,6 +37,29 @@ const props = defineProps(['reports'])
                             <div>
                                 <img :src="'storage/image/' + report.image" alt="" class="mr-4 my-3 h-16 w-16">
                             </div>
+
+                            <div>
+                                <div class="flex">
+                                    <div>
+                                        <Link :href="route('reports.edit', report.id)">
+                                        <button
+                                            class="inline-flex items-center px-4 py-2 my-7 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                            Edit
+                                        </button>
+                                        </Link>
+                                    </div>
+
+                                    <div class="mx-3">
+                                        <Link :href="route('reports.destroy', report.id)">
+                                        <button
+                                            class="inline-flex items-center px-4 py-2 my-7 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:bg-red-600 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                            Delete
+                                        </button>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

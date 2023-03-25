@@ -11,7 +11,7 @@ class UpdateReportRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'user_id' => 'required',
+            "description" => 'required',
+            'image' => 'required',
+            "report" => 'required',
+            'tags' => 'required',
+            'game' => 'required',
         ];
     }
 }
