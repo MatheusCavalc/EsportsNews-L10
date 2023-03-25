@@ -1,14 +1,25 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-import { useForm } from '@inertiajs/vue3'
+import EditorJS from '@editorjs/editorjs';
+import Header from "@editorjs/header";
+import List from "@editorjs/list";
+import ImageTool from '@editorjs/image';
+import Link from '@editorjs/link';
+import Paragraph from "@editorjs/paragraph";
+import { Head, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const props = defineProps(['user_id']);
+
+let show_form = ref(false)
+
+const showForm = () => {
+    show_form.value = true
+}
 
 const form = useForm({
     title: null,
     user_id: props.user_id,
-    city: null,
     description: null,
     image: null,
     report: null,
@@ -17,13 +28,55 @@ const form = useForm({
 })
 
 function submit() {
-    form.post('/reports')
+    editor.save().then((outputData) => {
+        form.report = outputData
+        form.post('/reports')
+    }).catch((error) => {
+        console.log('Saving failed: ', error)
+    });
 }
+
+const editor = new EditorJS({
+    holder: "editorjs",
+    autofocus: true,
+    initialBlock: "paragraph",
+    tools: {
+        header: {
+            class: Header,
+            config: {
+                placeholder: 'Enter a header',
+                levels: [1, 3],
+                defaultLevel: 1
+            }
+        },
+        list: {
+            class: List
+        },
+        linkTool: {
+            class: Link,
+        },
+        paragraph: {
+            class: Paragraph,
+            config: {
+                placeholder: "."
+            }
+        },
+        image: {
+            class: ImageTool,
+            config: {
+                endpoints: {
+                    byFile: 'http://localhost/upload-image', // Your backend file uploader endpoint
+                    byUrl: 'http://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
+                }
+            }
+        }
+    }
+});
 
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="New Report" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -35,21 +88,23 @@ function submit() {
                 <div class="overflow-hidden">
                     <div class="p-6 text-gray-900">Create Report</div>
 
-                    <div>
+                    <div class="bg-white">
+                        <div class="" id="editorjs" />
+                    </div>
+
+                    <button @click="showForm"
+                        class="inline-flex items-center mt-3 ml-3 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        Next Infos
+                    </button>
+
+
+                    <div class="mt-16" v-if="show_form">
                         <form @submit.prevent="submit">
                             <div class="mb-6">
                                 <label for="default-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title
                                 </label>
                                 <input type="text" id="default-input" v-model="form.title"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="default-input"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City
-                                </label>
-                                <input type="text" id="default-input" v-model="form.city"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
 
@@ -65,14 +120,6 @@ function submit() {
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="default_size">Thumb Image</label>
                                 <input @input="form.image = $event.target.files[0]"
-                                    class="block w-2/3 mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                    id="default_size" type="file">
-                            </div>
-
-                            <div class="mb-6">
-                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    for="default_size">Report</label>
-                                <input @input="form.report = $event.target.files[0]"
                                     class="block w-2/3 mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                     id="default_size" type="file">
                             </div>
@@ -102,6 +149,7 @@ function submit() {
                                 type="submit">
                                 Submit
                             </button>
+
                         </form>
                     </div>
                 </div>
@@ -109,3 +157,18 @@ function submit() {
         </div>
     </AuthenticatedLayout>
 </template>
+
+<style>
+h1 {
+    font-size: 56px;
+    font-weight: 700;
+    margin: inherit;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #5d6165;
+    margin: 16px 0 8px 0;
+}
+</style>

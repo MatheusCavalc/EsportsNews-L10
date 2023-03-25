@@ -24,10 +24,10 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/news/{id}/{slug}', [HomeController::class, 'showNews'])->name('show.report');
 
 //FOR EDITORS AND ADMINS
-Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');;
+Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::resource('reports', ReportController::class);
-
-
+Route::post('/upload-image', [ReportController::class, 'uploadImage']);
 
 
 

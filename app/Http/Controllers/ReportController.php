@@ -47,11 +47,6 @@ class ReportController extends Controller
         $request->image->move(public_path('storage/image'), $image_name);
         $data['image'] = $image_name;
 
-        $report = $request->file('report');
-        $report_name = time() . $slug . '.' . $report->getClientOriginalExtension();
-        $request->report->move(public_path('storage/report'), $report_name);
-        $data['report'] = $report_name;
-
         Report::create($data);
 
         return to_route('reports.index');
@@ -89,5 +84,21 @@ class ReportController extends Controller
     public function destroy(Report $report)
     {
         //
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required'
+        ]);
+
+        $picName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('storage/image'), $picName);
+        return response()->json([
+            "success" => 1,
+            "file" => [
+                "url" => "http://localhost/storage/image/$picName"
+            ]
+        ]);
     }
 }

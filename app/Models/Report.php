@@ -12,7 +12,6 @@ class Report extends Model
     protected $fillable = [
         'title',
         'user_id',
-        "city",
         "description",
         'slug',
         'image',
@@ -20,4 +19,9 @@ class Report extends Model
         'tags',
         'game',
     ];
+
+    protected $casts = [
+        'report' => 'array',
+    ];
+
 }

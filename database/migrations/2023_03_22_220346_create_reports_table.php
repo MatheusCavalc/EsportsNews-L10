@@ -17,7 +17,6 @@ return new class extends Migration
             //APARECE
             $table->string('title');
             $table->foreignId('user_id')->constrained();
-            $table->string('city');
             $table->string('description');
             $table->string('slug');
             $table->string('image');

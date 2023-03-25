@@ -24,10 +24,9 @@ class StoreReportRequest extends FormRequest
         return [
             'title' => 'required',
             'user_id' => 'required',
-            "city" => 'required',
             "description" => 'required',
             'image' => 'required', 'image',
-            "report" => 'required', 'file',
+            "report" => 'required',
             'tags' => 'required',
             'game' => 'required',
         ];
