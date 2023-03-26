@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
@@ -28,6 +29,8 @@ Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth',
 
 Route::resource('reports', ReportController::class);
 Route::post('/upload-image', [ReportController::class, 'uploadImage']);
+
+Route::resource('comments', CommentController::class);
 
 
 

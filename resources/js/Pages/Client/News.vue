@@ -1,5 +1,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
+import FormComments from '@/Components/FormComment.vue'
 import EditorJS from '@editorjs/editorjs';
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
@@ -8,12 +9,12 @@ import Link from '@editorjs/link';
 import Paragraph from "@editorjs/paragraph";
 import { Head } from '@inertiajs/vue3';
 
-const props = defineProps(['report'])
+const props = defineProps(['report', 'comments'])
 
 const editor = new EditorJS({
     holder: "editorjs",
     readOnly: true,
-    minHeight : 30,
+    minHeight: 30,
     tools: {
         header: Header,
         list: List,
@@ -31,9 +32,43 @@ const editor = new EditorJS({
     <MainLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="bg-white w-4/5">
-                        <div class="" id="editorjs" :readonly="true" />
+                <div class="bg-gray-100 overflow-hidden shadow-sm rounded-lg">
+                    <div class="bg-white w-4/5 border rounded-lg ml-10">
+                        <div class="bg-white rounded-lg" id="editorjs" :readonly="true" />
+                    </div>
+
+                    <div class="ml-10">
+                        <p class="text-2xl font-bold">Comments</p>
+
+                        <div v-if="$page.props.auth.user">
+                            <FormComments :report_id="props.report.id" :user_id="$page.props.auth.user.id" :report_slug="props.report.slug"/>
+                        </div>
+
+                        <div v-for="comment in comments" :key="comment.id" class="w-3/5 mt-8">
+                            <div class="flex justify-between border rounded-t-lg bg-white">
+                                <div class="ml-3 my-3">
+                                    #{{ comment.id }}
+                                </div>
+
+                                <div class="mr-3 my-3 flex">
+                                    <div>
+                                        {{ comment.created_at }}
+                                    </div>
+
+                                    <div class="text-gray-500 mx-2">
+                                        |
+                                    </div>
+
+                                    <div>
+                                        {{ comment.user.name }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-r border-b border-l rounded-b-lg bg-white">
+                                <p class="pl-3 py-3">{{ comment.comment }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -29,7 +29,11 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Comment::create($data);
+
+        return to_route('show.report', [$request->report_id, $request->slug]);
     }
 
     /**
