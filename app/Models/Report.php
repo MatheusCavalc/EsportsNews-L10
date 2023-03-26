@@ -24,4 +24,8 @@ class Report extends Model
         'report' => 'array',
     ];
 
+    public function author()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

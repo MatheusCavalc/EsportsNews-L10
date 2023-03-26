@@ -1,6 +1,7 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import moment from 'moment';
 
 const props = defineProps(['reports'])
 </script>
@@ -17,12 +18,12 @@ const props = defineProps(['reports'])
                         <div class="flex justify-between w-4/5 mx-auto my-7 border border-gray-100 rounded-md">
                             <div class="ml-4 my-auto">
                                 <p class="text-3xl font-bold">{{ report.title }}</p>
-                                <p>{{ report.created_at }}</p>
+                                <p>{{ moment(report.created_at).format('MMM D, YYYY [at] h:mm') }}</p>
                             </div>
 
                             <div>
                                 <img :src="'storage/image/' + report.image" alt=""
-                                    class="object-fill rounded-md mr-4 my-3 h-24 w-24">
+                                    class="object-cover rounded-md mr-4 my-3 h-24 w-24">
                             </div>
                         </div>
                         </Link>

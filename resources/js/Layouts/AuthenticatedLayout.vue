@@ -33,7 +33,7 @@ const showingNavigationDropdown = ref(false);
                                     Dashboard
                                 </NavLink>
                             </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" v-if="$page.props.auth.user.admin || $page.props.auth.user.editor">
                                 <NavLink :href="route('reports.index')" :active="route().current('reports.index')">
                                     Reports
                                 </NavLink>
@@ -120,7 +120,7 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('reports.index')" :active="route().current('reports.index')">
+                        <ResponsiveNavLink v-if="$page.props.auth.user.admin || $page.props.auth.user.editor" :href="route('reports.index')" :active="route().current('reports.index')">
                             Reports
                         </ResponsiveNavLink>
                     </div>

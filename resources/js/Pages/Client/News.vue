@@ -1,6 +1,7 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
 import FormComments from '@/Components/FormComment.vue'
+import CanNotComment from '@/Components/CanNotComment.vue'
 import EditorJS from '@editorjs/editorjs';
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
@@ -8,6 +9,7 @@ import ImageTool from '@editorjs/image';
 import Link from '@editorjs/link';
 import Paragraph from "@editorjs/paragraph";
 import { Head } from '@inertiajs/vue3';
+import moment from 'moment';
 
 const props = defineProps(['report', 'comments'])
 
@@ -34,14 +36,37 @@ const editor = new EditorJS({
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-gray-100 overflow-hidden shadow-sm rounded-lg">
                     <div class="bg-white w-4/5 border rounded-lg ml-10">
+                        <div>
+                            <img :src="'/storage/image/' + report.image" alt="" class=" h-auto w-full">
+                        </div>
+
+                        <div class="flex ml-40 mt-8">
+                            <div>
+                                {{ moment(report.created_at).format('MMM D, YYYY [at] h:mm') }}
+                            </div>
+
+                            <div class="text-gray-500 mx-2">
+                                |
+                            </div>
+
+                            <div>
+                                Write for {{ report.author.name }}
+                            </div>
+                        </div>
+
                         <div class="bg-white rounded-lg" id="editorjs" :readonly="true" />
                     </div>
 
-                    <div class="ml-10">
+                    <div class="ml-10 mt-5 mb-5">
                         <p class="text-2xl font-bold">Comments</p>
 
                         <div v-if="$page.props.auth.user">
-                            <FormComments :report_id="props.report.id" :user_id="$page.props.auth.user.id" :report_slug="props.report.slug"/>
+                            <FormComments :report_id="props.report.id" :user_id="$page.props.auth.user.id"
+                                :report_slug="props.report.slug" />
+                        </div>
+
+                        <div v-else class="border rounded-lg w-3/5 bg-white">
+                            <CanNotComment />
                         </div>
 
                         <div v-for="comment in comments" :key="comment.id" class="w-3/5 mt-8">
@@ -52,7 +77,7 @@ const editor = new EditorJS({
 
                                 <div class="mr-3 my-3 flex">
                                     <div>
-                                        {{ comment.created_at }}
+                                        {{ moment(comment.created_at).format('MMM D, YYYY [at] h:mm') }}
                                     </div>
 
                                     <div class="text-gray-500 mx-2">

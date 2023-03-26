@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function showNews($id)
     {
         return Inertia::render('Client/News', [
-            'report' => Report::where('id', $id)->first(),
+            'report' => Report::with('author')->where('id', $id)->first(),
             'comments' => Comment::with('user')->where('report_id', $id)->get()
         ]);
     }

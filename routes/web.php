@@ -25,12 +25,12 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/news/{id}/{slug}', [HomeController::class, 'showNews'])->name('show.report');
 
 //FOR EDITORS AND ADMINS
-Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard')->middleware('auth');
 
-Route::resource('reports', ReportController::class);
-Route::post('/upload-image', [ReportController::class, 'uploadImage']);
+Route::resource('reports', ReportController::class)->middleware(['admin.or.editor']);
+Route::post('/upload-image', [ReportController::class, 'uploadImage'])->middleware(['admin.or.editor']);
 
-Route::resource('comments', CommentController::class);
+Route::resource('comments', CommentController::class)->middleware(['auth']);
 
 
 
