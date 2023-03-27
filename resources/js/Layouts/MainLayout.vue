@@ -6,8 +6,8 @@ import { Link } from '@inertiajs/vue3';
 <template>
     <div>
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-gray-200 dark:bg-gray-900">
-                <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
+            <nav class="bg-gray-200 border-gray-200 dark:bg-gray-900">
+                <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-10">
                     <Link :href="route('index')" class="flex items-center">
                     <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
@@ -16,7 +16,7 @@ import { Link } from '@inertiajs/vue3';
                     </div>
                 </div>
             </nav>
-            <nav class="bg-gray-50 dark:bg-gray-700">
+            <nav class="bg-white dark:bg-gray-700">
                 <div class="max-w-screen-xl px-12 py-3 mx-auto">
                     <div class="flex justify-between">
                         <div class="flex items-center">
