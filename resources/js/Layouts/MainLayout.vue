@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/vue3';
                 <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-10">
                     <Link :href="route('index')" class="flex items-center">
                     <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">E-newS</span>
                     </Link>
                     <div class="flex items-center">
                     </div>
@@ -18,9 +18,9 @@ import { Link } from '@inertiajs/vue3';
             </nav>
             <nav class="bg-white dark:bg-gray-700">
                 <div class="max-w-screen-xl px-12 py-3 mx-auto">
-                    <div class="flex justify-between">
+                    <div class="flex md:justify-between">
                         <div class="flex items-center">
-                            <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
+                            <ul class="hidden md:flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
                                 <li>
                                     <Link :href="route('index')" class="text-gray-900 dark:text-white hover:underline"
                                         aria-current="page">News</Link>
@@ -53,7 +53,7 @@ import { Link } from '@inertiajs/vue3';
                             </Link>
                         </div>
 
-                        <div class="flex" v-if="$page.props.auth.user == null">
+                        <div class="flex ml-10 md:ml-0" v-if="$page.props.auth.user == null">
                             <Link :href="route('login')">
                             <button
                                 class="inline-flex items-center mr-2 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
@@ -93,7 +93,7 @@ import { Link } from '@inertiajs/vue3';
                             <Link :href="route('index')" class="flex items-center">
                             <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
                             <span
-                                class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                                class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">E-newS</span>
                             </Link>
                         </div>
                         <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

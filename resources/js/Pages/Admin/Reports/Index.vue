@@ -1,8 +1,13 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3'
 
 const props = defineProps(['reports'])
+
+function destroy(id) {
+    router.delete('reports/' + id)
+}
 </script>
 
 <template>
@@ -50,12 +55,10 @@ const props = defineProps(['reports'])
                                     </div>
 
                                     <div class="mx-3">
-                                        <Link :href="route('reports.destroy', report.id)">
-                                        <button
+                                        <button @click="destroy(report.id)"
                                             class="inline-flex items-center px-4 py-2 my-7 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:bg-red-600 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                             Delete
                                         </button>
-                                        </Link>
                                     </div>
                                 </div>
 

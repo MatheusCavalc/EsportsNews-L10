@@ -89,7 +89,7 @@ const editor = new EditorJS({
                 <div class="overflow-hidden">
                     <div class="p-6 text-gray-900">Create Report</div>
 
-                    <div class="bg-white">
+                    <div class="bg-white pb-40">
                         <div class="" id="editorjs" />
                     </div>
 

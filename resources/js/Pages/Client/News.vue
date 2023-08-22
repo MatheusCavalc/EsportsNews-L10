@@ -35,12 +35,12 @@ const editor = new EditorJS({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-gray-100 overflow-hidden shadow-sm rounded-lg">
-                    <div class="bg-white w-4/5 border rounded-lg ml-10">
+                    <div class="bg-white w-full border rounded-lg md:ml-10">
                         <div>
                             <img :src="'/storage/image/' + report.image" alt="" class=" h-auto w-full">
                         </div>
 
-                        <div class="flex ml-40 mt-8">
+                        <div class="flex ml-3 md:ml-44 mt-8">
                             <div>
                                 {{ moment(report.created_at).format('MMM D, YYYY [at] h:mm') }}
                             </div>
@@ -54,10 +54,12 @@ const editor = new EditorJS({
                             </div>
                         </div>
 
-                        <div class="bg-white rounded-lg" id="editorjs" :readonly="true" />
+                        <div class="md:w-4/5 mx-2 md:mx-0">
+                            <div class="bg-white rounded-lg" id="editorjs" :readonly="true" />
+                        </div>
                     </div>
 
-                    <div class="ml-10 mt-5 mb-5">
+                    <div class="mx-2 md:mx-0 md:ml-10 mt-5 mb-5">
                         <p class="text-2xl font-bold">Comments</p>
 
                         <div v-if="$page.props.auth.user">
@@ -65,7 +67,7 @@ const editor = new EditorJS({
                                 :report_slug="props.report.slug" />
                         </div>
 
-                        <div v-else class="border rounded-lg w-3/5 bg-white">
+                        <div v-else class="border rounded-lg w-full md:w-3/5 bg-white">
                             <CanNotComment />
                         </div>
 

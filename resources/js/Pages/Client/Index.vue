@@ -9,7 +9,7 @@ console.log(props.reports)
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="E-newS - Home" />
 
     <MainLayout>
         <div class="py-12">
@@ -25,17 +25,17 @@ console.log(props.reports)
                     </div>
 
                     <div v-for="report, index in reports" :id="index">
-                        <div v-if="index > 0">
+                        <div v-if="index > 0" class="mb-2 md:ml-2">
                             <Link :href="route('show.report', [report.id, report.slug])">
-                            <div class="flex justify-between w-4/5 bg-white ml-5 my-7 border border-gray-100 rounded-md">
-                                <div class="ml-4 my-auto">
-                                    <p class="text-3xl font-bold">{{ report.title }}</p>
+                            <div class="flex justify-between md:w-4/5 w-full bg-white border border-gray-100 rounded-md">
+                                <div class="md:ml-4 my-auto w-4/5">
+                                    <p class="text-xl md:text-3xl font-bold">{{ report.title }}</p>
                                     <p>{{ moment(report.created_at).format('MMM D, YYYY [at] h:mm') }}</p>
                                 </div>
 
                                 <div>
                                     <img :src="'storage/image/' + report.image" :alt="report.description"
-                                        class="object-cover rounded-md mr-4 my-3 h-24 w-24">
+                                        class="object-cover rounded-md md:mr-4 md:my-3 h-20 w-20 md:h-24 md:w-24">
                                 </div>
                             </div>
                             </Link>
