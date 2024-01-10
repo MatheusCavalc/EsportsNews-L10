@@ -6,20 +6,26 @@ import { Link } from '@inertiajs/vue3';
 <template>
     <div>
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-gray-200 border-gray-200 dark:bg-gray-900">
-                <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-10">
+            <nav class="hidden lg:block bg-gray-200 border-gray-200 dark:bg-gray-900">
+                <div class="flex flex-wrap justify-start items-center mx-auto max-w-screen-xl px-4 md:px-6 py-10">
                     <Link :href="route('index')" class="flex items-center">
                     <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">E-newS</span>
+                    <span class="self-center text-xl lg:text-3xl font-semibold whitespace-nowrap">E-newS</span>
                     </Link>
-                    <div class="flex items-center">
-                    </div>
                 </div>
             </nav>
             <nav class="bg-white dark:bg-gray-700">
-                <div class="max-w-screen-xl px-12 py-3 mx-auto">
-                    <div class="flex md:justify-between">
-                        <div class="flex items-center">
+                <div class="w-full lg:px-12 py-3 px-3">
+                    <div class="flex justify-between">
+                        <div class="block lg:hidden mt-1">
+                            <Link :href="route('index')" class="flex items-center">
+                            <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9"
+                                alt="Flowbite Logo" />
+                            <span class="self-center text-xl font-semibold whitespace-nowrap">E-newS</span>
+                            </Link>
+                        </div>
+
+                        <div class="hidden md:flex items-center">
                             <ul class="hidden md:flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
                                 <li>
                                     <Link :href="route('index')" class="text-gray-900 dark:text-white hover:underline"
@@ -37,33 +43,33 @@ import { Link } from '@inertiajs/vue3';
                             </ul>
                         </div>
 
-                        <div v-if="$page.props.auth.user">
+                        <div class="flex gap-2" v-if="$page.props.auth.user">
                             <Link :href="route('logout')" method="post" as="button">
                             <button
-                                class="inline-flex items-center mr-2 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Log out
                             </button>
                             </Link>
 
                             <Link :href="route('dashboard')">
                             <button
-                                class="inline-flex items-center mr-2 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Dashboard
                             </button>
                             </Link>
                         </div>
 
-                        <div class="flex ml-10 md:ml-0" v-if="$page.props.auth.user == null">
+                        <div class="flex gap-2" v-if="$page.props.auth.user == null">
                             <Link :href="route('login')">
                             <button
-                                class="inline-flex items-center mr-2 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Log in
                             </button>
                             </Link>
 
                             <Link :href="route('register')">
                             <button
-                                class="inline-flex items-center ml-2 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Register
                             </button>
                             </Link>
@@ -92,52 +98,14 @@ import { Link } from '@inertiajs/vue3';
                         <div class="mb-6 md:mb-0">
                             <Link :href="route('index')" class="flex items-center">
                             <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
-                            <span
-                                class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">E-newS</span>
+                            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">E-newS</span>
                             </Link>
-                        </div>
-                        <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-                            <div>
-                                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources
-                                </h2>
-                                <ul class="text-gray-600 dark:text-gray-400 font-medium">
-                                    <li class="mb-4">
-                                        <Link :href="route('index')" class="hover:underline">Flowbite</Link>
-                                    </li>
-                                    <li>
-                                        <Link :href="route('index')" class="hover:underline">Tailwind CSS</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us
-                                </h2>
-                                <ul class="text-gray-600 dark:text-gray-400 font-medium">
-                                    <li class="mb-4">
-                                        <Link :href="route('index')" class="hover:underline">Github</Link>
-                                    </li>
-                                    <li>
-                                        <Link :href="route('index')" class="hover:underline">Discord</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
-                                <ul class="text-gray-600 dark:text-gray-400 font-medium">
-                                    <li class="mb-4">
-                                        <a href="#" class="hover:underline">Privacy Policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="hover:underline">Terms &amp; Conditions</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                     <div class="sm:flex sm:items-center sm:justify-between">
                         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023
-                            <Link :href="route('index')" class="hover:underline">Flowbite™</Link>. All Rights Reserved.
+                            <Link :href="route('index')" class="hover:underline">E-newS™</Link>. All Rights Reserved.
                         </span>
                         <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                             <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
